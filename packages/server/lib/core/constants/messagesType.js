@@ -3,5 +3,10 @@
  */
 
 module.exports = {
-  REPLY: 'REPLY'
+  CALL: 'CALL',
+  REPLY: 'REPLY',
+
+  SUBSCRIBE: 'SUBSCRIBE',
+  UN_SUBSCRIBE: 'UN_SUBSCRIBE',
+  EVENT: 'EVENT',
 };

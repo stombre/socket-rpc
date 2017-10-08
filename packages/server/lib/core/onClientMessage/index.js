@@ -4,9 +4,10 @@
 
 const assert = require('assert');
 const call = require('./operationCall');
+const { CALL } = require('../constants/messagesType');
 
 const OPERATIONS = (server, socket) => ({
-  CALL: call(server, socket),
+  [CALL]: call(server, socket),
 });
 
 const onClientMessage = (server, socket) => data => {

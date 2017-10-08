@@ -17,3 +17,11 @@ server.rpc.on('users.getOne')
 ```
 
 ## Client
+```
+import client from '';
+
+const current = client.connect('');
+
+const user = await current.call('users.getOne', { id: 333 });
+
+```
