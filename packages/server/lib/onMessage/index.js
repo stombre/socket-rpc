@@ -3,21 +3,21 @@
  */
 
 const assert = require('assert');
-const call = require('./operationCall');
-const { CALL } = require('../constants/messagesType');
+const call = require('./call');
+const { CALL } = require('../constants/messagesType.const');
 
-const OPERATIONS = (server, socket) => ({
-  [CALL]: call(server, socket),
+const OPERATIONS = (app, socket) => ({
+  [CALL]: call(app, socket),
 });
 
-const onClientMessage = (server, socket) => data => {
+const onClientMessage = (app, socket) => data => {
   assert.ok(data.type, 'The message is not compatible with the framework format: Missing type field.');
 
-  if(!OPERATIONS(socket, server)[data.type]) {
+  if(!OPERATIONS(socket, app)[data.type]) {
     throw new Error('The message is not compatible with the framework format: Undefined operation.');
   }
 
-  OPERATIONS(socket, server)[data.type](data);
+  OPERATIONS(socket, app)[data.type](data);
 };
 
 module.exports = onClientMessage;

@@ -6,9 +6,7 @@ const ws = require('ws');
 const libFactory = require('./lib');
 
 const init = webSocketOptions => {
-  const WebSocket = require('ws');
-
-  const server = new WebSocket.Server(webSocketOptions);
+  const server = new ws.Server(webSocketOptions);
 
   return libFactory(server);
 };

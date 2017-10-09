@@ -10,9 +10,7 @@ Temporary name
 ```
 const server = require('')({ port: 9000 });
 
-server.rpc.on('users.getOne')
-    .use(myMiddleware)
-    .use(myMiddleware);
+server.expose('users.getOne', myHandler);
 
 ```
 
