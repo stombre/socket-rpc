@@ -1,4 +1,4 @@
-const { REPLY } = require('../constants/messagesType.const');
+const { REPLY } = require('../messagesType.const');
 
 const operationCall = (app, socket) => async data => {
   const { method, params, callId } = data;

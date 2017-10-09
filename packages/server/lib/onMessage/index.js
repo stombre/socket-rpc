@@ -1,6 +1,6 @@
 const assert = require('assert');
 const call = require('./call');
-const { CALL } = require('../constants/messagesType.const');
+const { CALL } = require('../messagesType.const');
 
 const OPERATIONS = (app, socket) => ({
   [CALL]: call(app, socket),

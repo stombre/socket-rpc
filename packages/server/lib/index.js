@@ -1,4 +1,4 @@
-const connectionHandler = require('./core/connectionHandler');
+const connectionHandler = require('./connectionHandler');
 const apiFactory = require('./api');
 
 const libFactory = socketServer => {

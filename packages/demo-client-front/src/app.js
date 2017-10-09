@@ -1,4 +1,4 @@
-import ilrt from '../../client-front/lib/irtl';
+import ilrt from '../../client-front/lib/ilrt';
 
 export class App {
   constructor() {
