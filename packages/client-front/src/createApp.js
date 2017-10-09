@@ -3,7 +3,7 @@ import { callFactory } from 'callFactory';
 
 const createApp = options => {
   const app = {
-    socket: createWebSocket(options)
+    socket: createWebSocket(options),
   };
 
   callFactory(app);
@@ -11,4 +11,4 @@ const createApp = options => {
   return app;
 };
 
-export { createApp };
+export default createApp;

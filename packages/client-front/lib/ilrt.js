@@ -2,11 +2,11 @@
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
-		define("Library", [], factory);
+		define("ilrt", [], factory);
 	else if(typeof exports === 'object')
-		exports["Library"] = factory();
+		exports["ilrt"] = factory();
 	else
-		root["Library"] = factory();
+		root["ilrt"] = factory();
 })(this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -43,9 +43,6 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
 /******/
-/******/ 	// identity function for calling harmony imports with the correct context
-/******/ 	__webpack_require__.i = function(value) { return value; };
-/******/
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
 /******/ 		if(!__webpack_require__.o(exports, name)) {
@@ -73,7 +70,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -87,28 +84,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createApp = __webpack_require__(1);
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var _createApp2 = _interopRequireDefault(_createApp);
 
-var Cat = function () {
-  function Cat() {
-    _classCallCheck(this, Cat);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-    this._name = 'Cat';
-  }
-
-  _createClass(Cat, [{
-    key: 'name',
-    get: function get() {
-      return this._name;
-    }
-  }]);
-
-  return Cat;
-}();
-
-exports.default = Cat;
+exports.default = _createApp2.default;
 module.exports = exports['default'];
 
 /***/ }),
@@ -122,28 +104,21 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createWebsocket = __webpack_require__(2);
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var _callFactory = __webpack_require__(3);
 
-var Dog = function () {
-  function Dog() {
-    _classCallCheck(this, Dog);
+var createApp = function createApp(options) {
+  var app = {
+    socket: (0, _createWebsocket.createWebSocket)(options)
+  };
 
-    this._name = 'Dog';
-  }
+  (0, _callFactory.callFactory)(app);
 
-  _createClass(Dog, [{
-    key: 'name',
-    get: function get() {
-      return this._name;
-    }
-  }]);
+  return app;
+};
 
-  return Dog;
-}();
-
-exports.default = Dog;
+exports.default = createApp;
 module.exports = exports['default'];
 
 /***/ }),
@@ -156,22 +131,62 @@ module.exports = exports['default'];
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Cat = exports.Dog = undefined;
 
-var _cat = __webpack_require__(0);
+var createWebSocket = function createWebSocket(_ref) {
+  var url = _ref.url;
+  return new WebSocket(url);
+};
 
-var _cat2 = _interopRequireDefault(_cat);
+exports.createWebSocket = createWebSocket;
 
-var _dog = __webpack_require__(1);
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
 
-var _dog2 = _interopRequireDefault(_dog);
+"use strict";
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.Dog = _dog2.default;
-exports.Cat = _cat2.default;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var callCounter = 0;
+
+var callFactory = function callFactory(app) {
+  app.callBack = {};
+  app.socket.onmessage(function (message) {
+    var callId = message.callId,
+        result = message.result;
+
+
+    app.callBack[callId].resolve(result);
+  });
+
+  app.call = function (method, params) {
+    var data = {
+      method: method,
+      params: params,
+      type: 'CALL',
+      callId: callCounter++
+    };
+
+    var resultHandler = new Promise(function (resolve, reject) {
+      app.callBack[data.callId] = {
+        resolve: resolve,
+        reject: reject
+      };
+    });
+
+    app.socket.send(data);
+
+    return resultHandler;
+  };
+
+  return app;
+};
+
+exports.callFactory = callFactory;
 
 /***/ })
 /******/ ]);
 });
-//# sourceMappingURL=Library.js.map
+//# sourceMappingURL=ilrt.js.map
