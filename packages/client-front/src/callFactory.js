@@ -31,4 +31,4 @@ const callFactory = app => {
   return app;
 };
 
-export { callFactory };
+export default callFactory;

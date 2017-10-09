@@ -1,4 +1,4 @@
 
 const createWebSocket = ({ url }) => new WebSocket(url);
 
-export { createWebSocket };
+export default createWebSocket;

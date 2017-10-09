@@ -1,5 +1,5 @@
-import { createWebSocket } from 'createWebsocket';
-import { callFactory } from 'callFactory';
+import createWebSocket from './createWebsocket';
+import callFactory from './callFactory';
 
 const createApp = options => {
   const app = {
