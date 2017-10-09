@@ -1,4 +1,4 @@
-# socket-rpc
+# ILRT : I Love Real Time
 Project to provide a powerful real time API based on web socket.
 
 Temporary name
