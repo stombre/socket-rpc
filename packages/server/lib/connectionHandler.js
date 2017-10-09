@@ -1,7 +1,3 @@
-/**
- * Created by guillaume on 25/09/2017.
- */
-
 const onMessage = require('./onMessage');
 const socketWrapper = require('./socketWrapper');
 

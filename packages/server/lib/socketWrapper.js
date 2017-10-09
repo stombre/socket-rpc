@@ -1,10 +1,7 @@
-/**
- * Created by guillaume on 25/09/2017.
- */
-
 const socketWrapper = server => socket => {
   return {
     socket,
+    session: {},
     send: (type, data) => {
       socket.send({
         type,

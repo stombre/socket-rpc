@@ -1,7 +1,3 @@
-/**
- * Created by guillaume on 25/09/2017.
- */
-
 const connectionHandler = require('./core/connectionHandler');
 const apiFactory = require('./api');
 

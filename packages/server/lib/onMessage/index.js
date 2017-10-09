@@ -1,7 +1,3 @@
-/**
- * Created by guillaume on 25/09/2017.
- */
-
 const assert = require('assert');
 const call = require('./call');
 const { CALL } = require('../constants/messagesType.const');

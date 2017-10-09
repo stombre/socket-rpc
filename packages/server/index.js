@@ -1,7 +1,3 @@
-/**
- * Created by guillaume on 25/09/2017.
- */
-
 const ws = require('ws');
 const libFactory = require('./lib');
 

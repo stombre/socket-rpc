@@ -10,6 +10,8 @@ Temporary name
 ```
 const server = require('')({ port: 9000 });
 
+server.use('users.*', loggedOnly);
+
 server.expose('users.getOne', myHandler);
 
 ```

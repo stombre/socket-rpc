@@ -1,18 +1,16 @@
-/**
- * Created by guillaume on 25/09/2017.
- */
-
 const { REPLY } = require('../constants/messagesType.const');
 
 const operationCall = (app, socket) => async data => {
   const { method, params, callId } = data;
 
-  const result = await app[method](params);
+  const callParams = Object.assign({}, { session: socket.session }, params);
+  const result = await app.rpc[method](callParams);
 
   const response = {
     callId,
     result,
   };
+
   socket.send(REPLY, response);
 };
 
